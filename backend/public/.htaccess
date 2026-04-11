@@ -1,0 +1,9 @@
+# backend/public/.htaccess
+RewriteEngine On
+
+# Si lo que piden no es un archivo real...
+RewriteCond %{REQUEST_FILENAME} !-f
+# ...ni una carpeta real...
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...mándalo todo al index.php
+RewriteRule ^ index.php [L]
