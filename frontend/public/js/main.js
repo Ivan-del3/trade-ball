@@ -1,31 +1,72 @@
-async function cargarProductos() {
+/**
+ * main.js - Lógica principal del Frontend de TradeBall
+ */
+
+const API_URL = 'http://localhost/trade-ball/backend/public/products';
+
+async function cargarProductos(categoria = '') {
     try {
-        // Llamamos al archivo index.php a través de la ruta que definimos
-        const response = await fetch('http://localhost/trade-ball/backend/public/products');
+        const contenedor = document.getElementById('lista-productos');
         
-        if (!response.ok) throw new Error('Error en la red');
+        contenedor.innerHTML = '<p class="loading">Cargando productos...</p>';
+
+        let urlFinal = API_URL;
+        if (categoria) {
+            urlFinal += `?category=${encodeURIComponent(categoria)}`;
+        }
+
+        const response = await fetch(urlFinal);
+        
+        if (!response.ok) {
+            throw new Error(`Error en el servidor: ${response.status}`);
+        }
 
         const productos = await response.json();
-        console.log("Productos recibidos:", productos);
+        
+        contenedor.innerHTML = ''; 
 
-        // Ejemplo de cómo pintarlos en el HTML
-        const contenedor = document.getElementById('lista-productos');
+        if (productos.length === 0) {
+            contenedor.innerHTML = '<p>No se encontraron productos en esta sección.</p>';
+            return;
+        }
+
         productos.forEach(p => {
             contenedor.innerHTML += `
                 <li class="product-card">
-                    <h3>${p.Name}</h3>
-                    <p>${p.Description}</p>
-                    <span class="price">${p.Price}€</span>
-                    <br><br>
-                    <button>Ver detalle</button>
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <p>${p.description}</p>
+                        <span class="price">${p.price}€</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-detail">Ver detalle</button>
+                    </div>
                 </li>
             `;
         });
 
     } catch (error) {
-        console.error("Hubo un problema:", error);
+        console.error("Error al cargar productos:", error);
+        document.getElementById('lista-productos').innerHTML = 
+            '<p class="error">Lo sentimos, no pudimos cargar los productos en este momento.</p>';
     }
 }
 
-// Ejecutar al cargar la página
-cargarProductos();
+document.addEventListener('DOMContentLoaded', () => {
+    
+    cargarProductos();
+
+    const nav = document.getElementById('main-nav');
+    
+    if (nav) {
+        nav.addEventListener('click', (evento) => {
+            if (evento.target.tagName === 'BUTTON' && evento.target.hasAttribute('data-cat')) {
+                
+                const categoria = evento.target.getAttribute('data-cat');    
+                console.log("Categoría pulsada:", categoria || "Todas");
+                
+                cargarProductos(categoria);
+            }
+        });
+    }
+});

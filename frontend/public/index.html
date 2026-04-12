@@ -9,17 +9,18 @@
 <body>
 
     <header>
-        <h1>Trade Ball</h1>
-        <nav>
-            <button id="btn-home">Inicio</button>
-            <button id="btn-login">Login</button>
+        <h1>Trade Ball</h1>          
+        <nav id="main-nav">
+            <button data-cat="">Inicio</button>
+            <button data-cat="Kanto">Kanto</button>
+            <button data-cat="Johto">Johto</button>
         </nav>
     </header>
 
     <main>
-        <h2>Productos Disponibles</h2>
+        <h2 id="titulo-pagina">Productos Disponibles</h2>
+        
         <ul id="lista-productos" class="product-grid">
-            <p>Cargando productos...</p>
         </ul>
     </main>
 
