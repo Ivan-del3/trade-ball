@@ -20,3 +20,61 @@ main { padding: 20px; }
 
 .product-card h3 { margin: 10px 0; font-size: 1.2rem; }
 .product-card .price { color: #27ae60; font-weight: bold; font-size: 1.1rem; }
+
+
+.filter-bar {
+    padding: 20px 20px;
+    text-align: left;
+    position: relative; 
+}
+
+#category-dropdown {
+    position: fixed; /* Ahora cubre toda la altura, hay que modificarlo */
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    background-color: white;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+    z-index: 2000;
+    padding: 20px;
+    
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+}
+
+#category-dropdown.is-open {
+    transform: translateX(0);
+}
+
+#category-nav{
+    display: flex;
+    flex-direction: column;
+    
+}
+.category-link {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: #333;
+    cursor: pointer;
+    text-align: left;
+    padding: 10px 0;
+    width: fit-content; /* Para que el subrayado solo ocupe el texto */
+    transition: color 0.2s;
+}
+
+.category-link:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+/* Cabecera del menú */
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+}

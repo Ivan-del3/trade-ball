@@ -1,13 +1,8 @@
-/**
- * main.js - Lógica principal del Frontend de TradeBall
- */
-
 const API_URL = 'http://localhost/trade-ball/backend/public/products';
 
 async function cargarProductos(categoria = '') {
     try {
         const contenedor = document.getElementById('lista-productos');
-        
         contenedor.innerHTML = '<p class="loading">Cargando productos...</p>';
 
         let urlFinal = API_URL;
@@ -16,13 +11,9 @@ async function cargarProductos(categoria = '') {
         }
 
         const response = await fetch(urlFinal);
-        
-        if (!response.ok) {
-            throw new Error(`Error en el servidor: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`Error en el servidor: ${response.status}`);
 
         const productos = await response.json();
-        
         contenedor.innerHTML = ''; 
 
         if (productos.length === 0) {
@@ -34,9 +25,9 @@ async function cargarProductos(categoria = '') {
             contenedor.innerHTML += `
                 <li class="product-card">
                     <div class="product-info">
-                        <h3>${p.name}</h3>
-                        <p>${p.description}</p>
-                        <span class="price">${p.price}€</span>
+                        <h3>${p.Name}</h3>
+                        <p>${p.Description}</p>
+                        <span class="price">${p.Price}€</span>
                     </div>
                     <div class="product-actions">
                         <button class="btn-detail">Ver detalle</button>
@@ -54,16 +45,38 @@ async function cargarProductos(categoria = '') {
 
 document.addEventListener('DOMContentLoaded', () => {
     
-    cargarProductos();
+    cargarProductos(); 
 
-    const nav = document.getElementById('main-nav');
-    
+    const btnToggle = document.getElementById('btn-toggle-categories');
+    const btnClose = document.getElementById('btn-close-categories');
+    const dropdown = document.getElementById('category-dropdown');
+    const nav = document.getElementById('category-nav');
+
+    btnToggle.addEventListener('click', (evento) => {
+        evento.stopPropagation();
+        dropdown.classList.add('is-open');
+    });
+
+    const cerrarMenu = () => {
+        dropdown.classList.remove('is-open');
+    };
+
+    btnClose.addEventListener('click', cerrarMenu);
+
+    document.addEventListener('click', (evento) => {
+        if (!dropdown.contains(evento.target) && !btnToggle.contains(evento.target)) {
+            cerrarMenu();
+        }
+    });
+
     if (nav) {
         nav.addEventListener('click', (evento) => {
-            if (evento.target.tagName === 'BUTTON' && evento.target.hasAttribute('data-cat')) {
-                
-                const categoria = evento.target.getAttribute('data-cat');    
-                console.log("Categoría pulsada:", categoria || "Todas");
+
+            const boton = evento.target.closest('.category-link');
+            
+            if (boton) {
+                const categoria = boton.getAttribute('data-cat');    
+                console.log("Filtrando por:", categoria || "Todas");
                 
                 cargarProductos(categoria);
             }

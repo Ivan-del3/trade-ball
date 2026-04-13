@@ -9,17 +9,32 @@
 <body>
 
     <header>
-        <h1>Trade Ball</h1>          
-        <nav id="main-nav">
-            <button data-cat="">Inicio</button>
-            <button data-cat="Kanto">Kanto</button>
-            <button data-cat="Johto">Johto</button>
-        </nav>
+        <h1>Trade Ball</h1>
+        <nav>
+            Favoritos Buzón Tú + Vender
+        </nav>          
     </header>
+
+    <div class="filter-bar">
+        <button id="btn-toggle-categories" class="btn-filter">☰ Categorías</button>
+    </div>
+
+    <aside id="category-dropdown">
+        <div class="dropdown-header">
+            <h3>Todas las categorías</h3>
+            <button id="btn-close-categories" class="btn-close">✖</button>
+        </div>
+        
+        <nav id="category-nav">
+            <button class="category-link" data-cat="">Ver todo</button>
+            <button class="category-link" data-cat="Kanto">Kanto</button>
+            <button class="category-link" data-cat="Johto">Johto</button>
+            <button class="category-link" data-cat="Hoenn">Hoenn</button>
+        </nav>
+    </aside>
 
     <main>
         <h2 id="titulo-pagina">Productos Disponibles</h2>
-        
         <ul id="lista-productos" class="product-grid">
         </ul>
     </main>
