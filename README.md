@@ -1,17 +1,16 @@
 ## ESTRUCUTRA
 ```
-market-ball/
+trade-ball/
 │
 ├── backend/                  # API REST en PHP puro
-│   ├── .htaccess             # Redirección de todas las peticiones a public/index.php
-│   ├── public/               # Document Root del servidor (punto de entrada)
-│   │   └── index.php         # Front Controller: intercepta todas las peticiones
+│   ├── public/               # Document Root del servidor
+│   │   └── index.php         # Front Controller: intercepta peticiones
+│   │   └── .htaccess         # Redirección de peticiones a public/index.php
 │   │
-│   ├── config/               # Configuraciones globales
-│   │   ├── database.php      # Credenciales de BD
-│   │   └── config.php        # Constantes globales (CORS, URLs, etc.)
+│   ├── config/               
+│   │   └── config.php        # Credenciales BD y constantes globales unificadas
 │   │
-│   ├── core/                 # Clases base del sistema (Motor de la API)
+│   ├── core/                 # Motor de la API
 │   │   ├── Router.php        # Enrutador personalizado
 │   │   ├── Database.php      # Conexión PDO Singleton
 │   │   ├── Request.php       # Manejador de la petición HTTP
@@ -35,39 +34,41 @@ market-ball/
 │   │   ├── User.php
 │   │   ├── Product.php
 │   │   ├── Order.php
-│   │   ├── Message.php       # Para el chat
-│   │   ├── Transaction.php   # Para el wallet
+│   │   ├── Message.php       
+│   │   ├── Transaction.php   
 │   │   ├── Review.php
 │   │   └── Favorite.php
 │   │
-│   └── utils/                # Funciones de ayuda compartidas
-│       ├── JwtHandler.php    # Generación y validación de tokens
-│       ├── Validator.php     # Sanitización y validación de inputs
-│       └── FileUploader.php  # Subida de imágenes de productos/avatars
+│   ├── utils/                # Funciones de ayuda compartidas
+│   │   ├── JwtHandler.php    # Generación y validación de tokens
+│   │   ├── Validator.php     # Sanitización y validación de inputs
+│   │   └── FileUploader.php  # Subida de imágenes de productos/avatars
+│   │
+│   └── logs/                 # Directorio para registrar errores de PHP (Recomendado)
 │
-└── frontend/                 # Aplicación cliente (Vanilla JS o mínimo framework)
-    ├── public/
-    │   ├── index.html        # SPA principal (Single Page Application)
-    │   ├── css/
-    │   │   └── style.css
-    │   └── assets/           # Imágenes estáticas, iconos
-    │
-    └── src/
-        ├── js/
-        │   ├── main.js       # Punto de entrada de JS
-        │   ├── router.js     # Enrutador del frontend (Navegación sin recargar)
-        │   ├── api.js        # Servicio centralizado para llamadas fetch()
-        │   │
-        │   ├── views/        # Lógica de renderizado por pantalla
-        │   │   ├── home.js
-        │   │   ├── login.js
-        │   │   ├── productDetail.js
-        │   │   └── dashboard.js
-        │   │
-        │   └── components/   # Fragmentos de UI reutilizables
-        │       ├── navbar.js
-        │       ├── productCard.js
-        │       └── chatBox.js
+└── frontend/                 # Aplicación cliente (Vanilla JS puro)
+    └── public/               # Todo el contenido accesible por el navegador
+        ├── index.html        # SPA principal (Single Page Application)
         │
-        └── .env.example      # Ejemplo de variables de entorno (URL de la API)
+        ├── assets/           # Imágenes estáticas, iconos, etc.
+        │
+        ├── css/              # Carpeta de Estilos
+        │   └── style.css     # Hoja de estilos principal
+        │
+        └── js/               # Carpeta de Lógica (JavaScript)
+            ├── config.js     # Archivo con la URL de tu API (Sustituye al .env)
+            ├── main.js       # Punto de entrada de JS
+            ├── router.js     # Enrutador del frontend (Navegación sin recargar)
+            ├── api.js        # Servicio centralizado para llamadas fetch()
+            │
+            ├── views/        # Lógica de renderizado por pantalla
+            │   ├── home.js
+            │   ├── login.js
+            │   ├── productDetail.js
+            │   └── dashboard.js
+            │
+            └── components/   # Fragmentos de UI reutilizables
+                ├── navbar.js
+                ├── productCard.js
+                └── chatBox.js
 ```

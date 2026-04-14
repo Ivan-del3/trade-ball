@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarketBall - Tu Marketplace</title>
+    <title>TradeBall</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <header>
-        <h1>Market Ball</h1>
+        <a href="/" data-link ><h1>Trade Ball</h1></a> 
         <nav>
-            <button id="btn-home">Inicio</button>
-            <button id="btn-login">Login</button>
-        </nav>
+            Favoritos Buzón Tú + Vender
+        </nav>          
     </header>
 
-    <main>
-        <h2>Productos Disponibles</h2>
-        <ul id="lista-productos" class="product-grid">
-            <p>Cargando productos...</p>
-        </ul>
+    <div class="filter-bar">
+        <button id="btn-toggle-categories" class="btn-filter">☰ Categorías</button>
+    </div>
+
+    <aside id="category-dropdown">
+        <div class="dropdown-header">
+            <h3>Todas las categorías</h3>
+            <button id="btn-close-categories" class="btn-close">✖</button>
+        </div>
+        
+        <nav id="category-nav">
+            <button class="category-link" data-cat="">Ver todo</button>
+            <button class="category-link" data-cat="Kanto">Kanto</button>
+            <button class="category-link" data-cat="Johto">Johto</button>
+            <button class="category-link" data-cat="Hoenn">Hoenn</button>
+        </nav>
+    </aside>
+
+    <main id="app">
     </main>
 
-    <script src="../src/js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
+<a href="/login" data-link>Ir a entrar</a>
 </html>
