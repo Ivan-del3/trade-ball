@@ -1,23 +1,21 @@
 import { Home } from './views/home.js';
 import { Login } from './views/login.js';
+import { Error404 } from './views/Error404.js';
 
 // --- 1. EL ENRUTADOR (Decide qué pantalla mostrar) ---
+const routes = {
+    '/' : Home,
+    '/login' : Login
+}
 function enrutador() {
     const app = document.getElementById('app');
-    const ruta = window.location.pathname;
+    const route = window.location.pathname;
+    const vista = routes[route] || Error404;
 
-    // Si en la barra de direcciones pone index.html/login
-    if (ruta === '/login') {
-        app.innerHTML = Login.render(); // Metemos el HTML
-        Login.init();                   // Activamos los botones
-    } 
-    // Si no pone nada (o pone /), mostramos los productos
-    else {
-        app.innerHTML = Home.render();
-        Home.init(); 
-    }
+    app.innerHTML = vista.render();
+    if (typeof vista.init === "function") vista.init();
+
 }
-
 
 // --- 2. LÓGICA GLOBAL (Se ejecuta al cargar la página) ---
 document.addEventListener('DOMContentLoaded', function() {

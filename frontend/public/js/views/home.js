@@ -36,8 +36,9 @@ export const Home = {
             }
 
             // Usamos function(p) en lugar de p =>
+            let contenidoHtml = '';
             productos.forEach(function(p) {
-                contenedor.innerHTML += `
+                contenidoHtml += `
                     <li class="product-card">
                         <div class="product-info">
                             <h3>${p.Name}</h3>
@@ -50,6 +51,7 @@ export const Home = {
                     </li>
                 `;
             });
+            contenedor.innerHTML = contenidoHtml;
 
         } catch (error) {
             console.error("Error al cargar productos:", error);
