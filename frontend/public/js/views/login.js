@@ -1,4 +1,3 @@
-// frontend/public/js/views/login.js
 export const Login = {
     render: function() {
         return `
@@ -38,16 +37,15 @@ export const Login = {
                 const data = await response.json();
 
                 if (response.ok) {
-                    // ¡Login correcto! Guardamos el token en localStorage
+
                     localStorage.setItem('tradeball_token', data.token);
                     
-                    // Redirigimos al panel del usuario (por ejemplo la ruta /tu)
                     history.pushState({}, "", "/tu");
                     
-                    // Disparamos un evento para que el enrutador se entere y cargue la vista
+
                     window.dispatchEvent(new Event('popstate')); 
                 } else {
-                    // Mostramos el error del servidor (ej: credenciales incorrectas)
+
                     errorMsg.textContent = data.error;
                     errorMsg.style.display = 'block';
                 }

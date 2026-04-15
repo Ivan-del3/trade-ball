@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         enrutador();
     })
 
-    // Tu código exacto del menú lateral adaptado
     const btnToggle = document.getElementById('btn-toggle-categories');
     const btnClose = document.getElementById('btn-close-categories');
     const dropdown = document.getElementById('category-dropdown');

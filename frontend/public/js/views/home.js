@@ -1,7 +1,6 @@
 const API_URL = 'http://localhost/trade-ball/backend/public/products';
 
 export const Home = {
-    // 1. Dibuja el HTML vacío de los productos
     render: function() {
         return `
             <h2 id="titulo-pagina">Productos Disponibles</h2>
@@ -9,7 +8,6 @@ export const Home = {
         `;
     },
 
-    // 2. Tu código original para buscar en la base de datos
     init: async function(categoria) {
         if (categoria === undefined) categoria = ''; // Por si viene vacío
 
@@ -36,9 +34,10 @@ export const Home = {
             }
 
             // Usamos function(p) en lugar de p =>
-            let contenidoHtml = '';
+            let htmlContent;
             productos.forEach(function(p) {
-                contenidoHtml += `
+                if(p){
+                htmlContent += `
                     <li class="product-card">
                         <div class="product-info">
                             <h3>${p.Name}</h3>
@@ -50,8 +49,11 @@ export const Home = {
                         </div>
                     </li>
                 `;
+                }
+
+
             });
-            contenedor.innerHTML = contenidoHtml;
+            contenedor.innerHTML = htmlContent;
 
         } catch (error) {
             console.error("Error al cargar productos:", error);
