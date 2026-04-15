@@ -181,3 +181,21 @@ main { padding: 20px; }
     text-align: center;
     max-width: 300px;
 }
+
+
+/* -------- GESTIÓN DE LAYOUTS (SPAs) ------- */
+
+/* MODO MINIMAL: Oculta todo excepto el main (Para Login y 404) */
+body[data-view="minimal"] header,
+body[data-view="minimal"] .filter-bar,
+body[data-view="minimal"] aside,
+body[data-view="minimal"] footer,
+body[data-view="minimal"] > a[href="/login"] { 
+    display: none;
+}
+
+/* MODO PERSONAL PANEL: Oculta solo el footer (Para el panel de usuario) */
+body[data-view="personal-panel"] footer,
+body[data-view="personal-panel"] > a[href="/login"] {
+    display: none;
+}
