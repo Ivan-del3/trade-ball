@@ -4,16 +4,30 @@ import { Error404 } from './views/Error404.js';
 
 // --- 1. EL ENRUTADOR (Decide qué pantalla mostrar) ---
 const routes = {
-    '/' : Home,
-    '/login' : Login
-}
+    '/': {
+        component: Home,
+        layout: 'full'
+    },
+    '/login': {
+        component: Login,
+        layout: 'minimal'
+    },
+    '/tu': {
+        component: Home, //Aquí pondré el panel de Tú
+        layout: 'personal-panel'
+    }
+};
+
 function enrutador() {
     const app = document.getElementById('app');
-    const route = window.location.pathname;
-    const vista = routes[route] || Error404;
+    const path = window.location.pathname;
+    const routeConfig = routes[path] || {component: Error404, layout: 'minimal'};
 
-    app.innerHTML = vista.render();
-    if (typeof vista.init === "function") vista.init();
+    document.body.setAttribute('data-view', routeConfig.layout)
+
+    app.innerHTML = routeConfig.component.render();
+
+    if (typeof routeConfig.component.init === "function") routeConfig.component.init();
 
 }
 

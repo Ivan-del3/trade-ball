@@ -7,6 +7,7 @@ export const Login = {
                 <input type="password" id="password" placeholder="Contraseña" required style="display:block; margin-bottom: 10px; padding: 5px;">
                 <button type="submit">Entrar</button>
             </form>
+            <a href= "/">volver al inicio</a>
         `;
     },
 
